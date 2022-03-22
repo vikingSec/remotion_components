@@ -10,8 +10,9 @@ export const ZoomLeftBG:React.FC<{
     endPoint?:number,
     sizeW:number,
     sizeH:number,
-    spring?:boolean
-}> = ({inner, startFrame=0, endFrame=20, startPoint=-5000, endPoint=0, sizeW, sizeH,spring=false}) => {
+    spring?:boolean,
+    _style?:Object
+}> = ({_style={},inner, startFrame=0, endFrame=20, startPoint=-5000, endPoint=0, sizeW, sizeH,spring=false}) => {
     
     const videoConfig = useVideoConfig();
     const {height, width, fps} = useVideoConfig();

@@ -9,8 +9,9 @@ export const DelayPop:React.FC<{
     _style?:Object,
     startFrame:number,
     classname?:string,
-    randomPos?:boolean
-}> = ({classname,str,arr,delays, _style={}, startFrame, randomPos=false}) =>
+    randomPos?:boolean,
+    delimiter?:string
+}> = ({delimiter=' ',classname,str,arr,delays, _style={}, startFrame, randomPos=false}) =>
 {
     const rendered = Array();
     const frame = useCurrentFrame();
@@ -18,7 +19,7 @@ export const DelayPop:React.FC<{
         if(str){
 
             rendered.push(
-                <DPChild classname={classname} item_str={str.split(' ')[i]} delay={startFrame+delays[i]} _style={_style}/>
+                <DPChild classname={classname} item_str={str.split(delimiter)[i]} delay={startFrame+delays[i]} _style={_style}/>
             );
         
         }else{

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {useCurrentFrame, useVideoConfig} from 'remotion'
 
 export const DPChild:React.FC<{
@@ -16,16 +16,20 @@ export const DPChild:React.FC<{
     const maxW = videoConfig.width*0.7
     const maxH = videoConfig.height*0.7;
     
-    const y = Math.floor(Math.random()*maxH);
-    const x = Math.floor(Math.random()*maxW);
+    let newStyle = {};
+    const randoms = useEffect(() => {
+
+        const y = Math.floor(Math.random()*maxH);
+        const x = Math.floor(Math.random()*maxW);
+        newStyle = {
+            ..._style,
+            marginTop:y,
+            marginLeft:x
+        }
+    }, [])
     
     console.log('[-] Bad style: ',_style)
     
-    const newStyle = useRef({
-        ..._style,
-        marginTop:y,
-        marginLeft:x
-    });
     console.log('_style: ',_style)
     console.log('newStyle: ',newStyle)
     if(item_str){
@@ -39,7 +43,7 @@ export const DPChild:React.FC<{
         if(frame > delay){
 
             if(randomPos){
-                child = <img className={classname} src={item_obj["src"]} style={newStyle.current}/>   
+                child = <img className={classname} src={item_obj["src"]} style={newStyle}/>   
             }else{
                 child = <img className={classname} src={item_obj["src"]} style={_style}/>
             }

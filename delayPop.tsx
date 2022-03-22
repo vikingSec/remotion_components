@@ -7,24 +7,23 @@ export const DelayPop:React.FC<{
     arr?:Array<React.Element>
     delays:Array<number>
     _style?:Object,
-    startFrame:number
-}> = ({str,arr,delays, _style, startFrame}) =>
+    startFrame:number,
+    classname?:string,
+    randomPos?:boolean
+}> = ({classname,str,arr,delays, _style={}, startFrame, randomPos=false}) =>
 {
     const rendered = Array();
     const frame = useCurrentFrame();
     for(let i = 0; i<delays.length; i++){
-        if(str.length > 0){
+        if(str){
+
             rendered.push(
-                <DPChild item_str={str.split(' ')[i]} delay={startFrame+delays[i]} _style={_style}/>
+                <DPChild classname={classname} item_str={str.split(' ')[i]} delay={startFrame+delays[i]} _style={_style}/>
             );
         
         }else{
             rendered.push(
-                <div style={{display:"flex", flexDirection:"row", textAlign:"center", marginLeft:"auto",marginRight:"auto", width:"50%"}}>
-                <Sequence from={delays[i]}>
-                    {arr[i]}
-                </Sequence>
-                </div>
+                <DPChild classname={classname} item_obj={{"type":"image","src":arr[i]}} delay={startFrame+delays[i]} _style={_style} randomPos={randomPos}/>
             );
         }
     }
